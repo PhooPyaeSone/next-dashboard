@@ -101,6 +101,10 @@ async function seedRevenue() {
   return insertedRevenue;
 }
 
+async function test() {
+  await sql`(CREATE TABLE IF NOT EXISTS test (id UUID DEFAULT uuid_generate_v4() PRIMARY KEY, name VARCHAR(255) NOT NULL, email TEXT NOT NULL UNIQUE, password TEXT NOT NULL);)`;
+}
+
 export async function GET() {
   try {
     await setupDatabase(); // Ensure extension is set up once
@@ -110,6 +114,7 @@ export async function GET() {
       seedCustomers(),
       seedInvoices(),
       seedRevenue(),
+      test(),
     ]);
 
     return Response.json({ message: 'Database seeded successfully' });
