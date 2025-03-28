@@ -102,7 +102,14 @@ async function seedRevenue() {
 }
 
 async function test() {
-  await sql`(CREATE TABLE IF NOT EXISTS test (id UUID DEFAULT uuid_generate_v4() PRIMARY KEY, name VARCHAR(255) NOT NULL, email TEXT NOT NULL UNIQUE, password TEXT NOT NULL);)`;
+  await sql`
+    CREATE TABLE IF NOT EXISTS test (
+      id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+      name VARCHAR(255) NOT NULL,
+      email TEXT NOT NULL UNIQUE,
+      password TEXT NOT NULL
+    );
+  `;
 }
 
 export async function GET() {
@@ -110,10 +117,10 @@ export async function GET() {
     await setupDatabase(); // Ensure extension is set up once
 
     const result = await sql.begin((sql) => [
-      seedUsers(),
-      seedCustomers(),
-      seedInvoices(),
-      seedRevenue(),
+      // seedUsers(),
+      // seedCustomers(),
+      // seedInvoices(),
+      // seedRevenue(),
       test(),
     ]);
 
