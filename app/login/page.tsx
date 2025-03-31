@@ -8,11 +8,11 @@ import {
 } from '@heroicons/react/24/outline';
 import { ArrowRightIcon } from '@heroicons/react/20/solid';
 import { Button } from '@/app/ui/button';
-import { useActionState } from 'react';
+import { Suspense, useActionState } from 'react';
 import { authenticate } from '@/app/lib/actions';
 import { useSearchParams } from 'next/navigation';
 
-export default function LoginForm() {
+function LoginFormContent() {
     const searchParams = useSearchParams();
     const callbackUrl = searchParams.get('callbackUrl') || '/dashboard';
     const [errorMessage, formAction, isPending] = useActionState(
@@ -85,5 +85,13 @@ export default function LoginForm() {
                 </div>
             </div>
         </form>
+    );
+}
+
+export default function LoginForm() {
+    return (
+        <Suspense fallback={<div>Loading...</div>}>
+            <LoginFormContent />
+        </Suspense>
     );
 }
