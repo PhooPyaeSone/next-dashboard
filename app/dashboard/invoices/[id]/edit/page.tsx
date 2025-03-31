@@ -4,7 +4,7 @@ import EditInvoiceForm from '@/app/ui/invoices/edit-form';
 import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
 export const metadata: Metadata = {
-    title: 'Editing Invoice | Acme Dashboard',
+    title: 'Editing Invoice',
 };
 export default async function Page(props: {
     params: Promise<{ id: string }>;
